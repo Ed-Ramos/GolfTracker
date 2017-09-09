@@ -10,12 +10,13 @@ import android.util.Log;
 
 import com.example.android.golftracker.data.GolfContract.GolfEntry;
 
-public class GolfDbHelper extends SQLiteOpenHelper{
-
+public class GolfDbHelper extends SQLiteOpenHelper {
 
     public static final String LOG_TAG = GolfDbHelper.class.getSimpleName();
 
-    /** Name of the database file */
+    /**
+     * Name of the database file
+     */
     private static final String DATABASE_NAME = "golf.db";
 
     /**
@@ -36,7 +37,7 @@ public class GolfDbHelper extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
 
         // Create a String that contains the SQL statement to create the golftracker table
-        String SQL_CREATE_GOLFTRACKER_TABLE =  "CREATE TABLE " + GolfEntry.TABLE_NAME + " ("
+        String SQL_CREATE_GOLFTRACKER_TABLE = "CREATE TABLE " + GolfEntry.TABLE_NAME + " ("
                 + GolfEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + GolfEntry.COLUMN_NAME + " TEXT NOT NULL, "
                 + GolfEntry.COLUMN_DATE + " TEXT, "
@@ -47,7 +48,6 @@ public class GolfDbHelper extends SQLiteOpenHelper{
         db.execSQL(SQL_CREATE_GOLFTRACKER_TABLE);
 
     }//End of OnCreate method
-
 
     /**
      * This is called when the database needs to be upgraded.
@@ -67,7 +67,7 @@ public class GolfDbHelper extends SQLiteOpenHelper{
 
         SQLiteDatabase db = getWritableDatabase();
 
-        long newRowId = db.insert(GolfEntry.TABLE_NAME,null,values);
+        long newRowId = db.insert(GolfEntry.TABLE_NAME, null, values);
 
         if (newRowId != -1) {
             Log.d(LOG_TAG, "New row entry successful. ID =" + newRowId);
@@ -78,7 +78,6 @@ public class GolfDbHelper extends SQLiteOpenHelper{
 
     }// end insertGolf
 
-
     public Cursor readGolf() {
         SQLiteDatabase db = getReadableDatabase();
 
@@ -88,11 +87,10 @@ public class GolfDbHelper extends SQLiteOpenHelper{
                 GolfEntry.COLUMN_DATE,
                 GolfEntry.COLUMN_COURSE,
                 GolfEntry.COLUMN_SCORE
-               };
+        };
 
-               Cursor cursor = db.query(GolfEntry.TABLE_NAME, projection, null, null, null,null, null);
+        Cursor cursor = db.query(GolfEntry.TABLE_NAME, projection, null, null, null, null, null);
         return cursor;
     }
-
 
 }// End of GolfDbHelper class

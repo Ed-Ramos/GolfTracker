@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
 
-
+            // display the column headers in app
             displayView.append(GolfEntry._ID + " - " +
                     GolfEntry.COLUMN_NAME + " - " +
                     GolfEntry.COLUMN_DATE + " - " +
@@ -44,8 +44,10 @@ public class MainActivity extends AppCompatActivity {
             int courseColumnIndex = cursor.getColumnIndex(GolfEntry.COLUMN_COURSE);
             int scoreColumnIndex = cursor.getColumnIndex(GolfEntry.COLUMN_SCORE);
 
-            Log.d (LOG_TAG, "ID| NAME| DATE| COURSE| SCORE");
+            // display the column headers in monitor
+            Log.d(LOG_TAG, "ID| NAME| DATE| COURSE| SCORE");
 
+            //Iterate through rows and obtain the info for each column
             while (cursor.moveToNext()) {
                 int id = cursor.getInt(idColumnIndex);
                 String name = cursor.getString(nameColumnIndex);
@@ -53,20 +55,21 @@ public class MainActivity extends AppCompatActivity {
                 String course = cursor.getString(courseColumnIndex);
                 int score = cursor.getInt(scoreColumnIndex);
 
+                // display the column info for each row in app
                 displayView.append(("\n" + id + " - " +
                         name + " - " +
                         date + " - " +
                         course + " - " +
                         score));
 
+                //display column info for each row in monitor
                 Log.d(LOG_TAG, id + " " + name + " " + date + " " + course + " " + score);
-        }
+            }
 
-
-    } finally {
+        } finally {
 
             cursor.close();
         }
 
-        }
+    }
 }//End of MainActivity
